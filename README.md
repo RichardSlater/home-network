@@ -7,6 +7,7 @@ Documentation and Designs for home network, with enhanced security.
 - 10.229.0.0/16 (255.255.0.0)
   - 10.229.0.1 (Gateway) 
   - 10.229.0.7 (Cloud Key)
+  - 10.229.1.5 (Raspberry Pi)
 
 ## Overview
 
