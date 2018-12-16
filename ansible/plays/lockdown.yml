@@ -4,12 +4,15 @@
   hosts: all
   become: yes
   roles:
+     - update
      - delete-pi-user
      - set-hostname
+     - disable-wireless
      - create-user
      - disable-passwords
      - static-ip
      - expand-filesystem
+     - configure-bash
 
   vars:
     - inventory_hostname: "net0001"
