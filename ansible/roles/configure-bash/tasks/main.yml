@@ -1,0 +1,3 @@
+- name: 'Set default bash aliases'
+  copy: src=./files/etc_profile.d_bash_aliases.sh dest=/etc/profile.d/bash_aliases.sh mode=0600
+  tags: admin
