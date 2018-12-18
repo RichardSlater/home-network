@@ -8,6 +8,9 @@ Documentation and Designs for home network, with enhanced security.
   - 10.229.0.1 (Gateway) 
   - 10.229.0.7 (Cloud Key)
   - 10.229.1.5 (Raspberry Pi)
+  - 10.229.5.2 - 10.229.5.254 (DHCP)
+- 10.230.0.1 - 10.230.255.254 (VPN)
+  
 
 ## Overview
 
