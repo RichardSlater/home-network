@@ -12,4 +12,4 @@ Pre-requisites:
 Commands to execute:
 
      $ cd plays
-     $ ansible-playbook --user ansible --inventory '10.229.1.5,' lockdown.yml
+     $ ansible-playbook --user ansible --inventory '10.229.1.5,' lockdown.yml --vault-password-file ~/ansible_password
