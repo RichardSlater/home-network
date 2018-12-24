@@ -51,17 +51,18 @@ if [[ "$CURRENT_BILLING_ACT" == "" ]]
     echo -e "${GREEN}Billing Account${RESET}: The Billing Account ($TF_VAR_billing_account) is configured in gcloud."
 fi
 
-if [[ "$TF_ADMIN" == "" ]]
+if [[ "$TF_VAR_admin_project" == "" ]]
   then
-    echo -e "${RED}Admin Project${RESET}: The Admin Project in the \$TF_ADMIN variables doesn't appear to be set."
+    echo -e "${RED}Admin Project${RESET}: The Admin Project in the \$TF_VAR_admin_project variables doesn't appear to be set."
     DIRTY=1
   else
-    echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_ADMIN) is set."
+    echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_VAR_admin_project) is set."
 fi
 
 if [[ "$DIRTY" == "1" ]]
   then
     echo -e "${RED}Error${RESET}: One of more guard clauses failed check environment.sh and gcloud configuration matches up"
+    exit 1
 fi
 
 # Create the project if it does not already exist
@@ -69,15 +70,15 @@ EXISTING_PROJECT=$(gcloud projects list --filter=name:richardslater-terraform-ad
 
 if [[ "$EXISTING_PROJECT" == "[]" ]]
   then
-    echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_ADMIN) does not exist yet, creating it and linking it to the billing account."
-    gcloud projects create ${TF_ADMIN} --organization ${TF_VAR_org_id} --set-as-default
-    gcloud beta billing projects link ${TF_ADMIN} --billing-account ${TF_VAR_billing_account}
+    echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_VAR_admin_project) does not exist yet, creating it and linking it to the billing account."
+    gcloud projects create ${TF_VAR_admin_project} --organization ${TF_VAR_org_id} --set-as-default
+    gcloud beta billing projects link ${TF_VAR_admin_project} --billing-account ${TF_VAR_billing_account}
   else
-    echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_ADMIN) already exists."
+    echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_VAR_admin_project) already exists."
 fi
 
-TF_PROJECT=$(gcloud projects list --format='value(projectNumber)' --filter=name:$TF_ADMIN)
-echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_ADMIN) ID is $TF_PROJECT."
+TF_PROJECT=$(gcloud projects list --format='value(projectNumber)' --filter=name:$TF_VAR_admin_project)
+echo -e "${GREEN}Admin Project${RESET}: The Admin Project ($TF_VAR_admin_project) ID is $TF_PROJECT."
 
 # Enable the required services
 
@@ -97,23 +98,23 @@ if [[ "$EXISTING_USER" == "[]" ]]
     gcloud iam service-accounts create terraform --display-name "Terraform admin account"
  
     echo -e "${GREEN}Terraform User${RESET}: Downloading JSON credentials."
-    gcloud iam service-accounts keys create ${TF_CREDS} --iam-account terraform@${TF_ADMIN}.iam.gserviceaccount.com
+    gcloud iam service-accounts keys create ${TF_CREDS} --iam-account terraform@${TF_VAR_admin_project}.iam.gserviceaccount.com
   else
-    echo -e "${GREEN}Terraform User${RESET}: The Admin Project ($TF_ADMIN) already exists."
+    echo -e "${GREEN}Terraform User${RESET}: The Admin Project ($TF_VAR_admin_project) already exists."
 fi
 
 # Assign roles for the user, don't need to check first as this works repeatedly
 
 for prole in $PROJECT_ROLES
 do
-  echo -e "${GREEN}Terraform User${RESET}: Granting $prole role to the Admin Project ($TF_ADMIN)."
-  gcloud projects add-iam-policy-binding ${TF_ADMIN} --member serviceAccount:terraform@${TF_ADMIN}.iam.gserviceaccount.com --role $prole
+  echo -e "${GREEN}Terraform User${RESET}: Granting $prole role to the Admin Project ($TF_VAR_admin_project)."
+  gcloud projects add-iam-policy-binding ${TF_VAR_admin_project} --member serviceAccount:terraform@${TF_VAR_admin_project}.iam.gserviceaccount.com --role $prole
 done
 
 for orole in $ORG_ROLES
 do
   echo -e "${GREEN}Terraform User${RESET}: Granting $orole role to the organisation."
-  gcloud organizations add-iam-policy-binding ${TF_VAR_org_id} --member serviceAccount:terraform@${TF_ADMIN}.iam.gserviceaccount.com --role roles/billing.user
+  gcloud organizations add-iam-policy-binding ${TF_VAR_org_id} --member serviceAccount:terraform@${TF_VAR_admin_project}.iam.gserviceaccount.com --role roles/billing.user
 done
 
 # All done

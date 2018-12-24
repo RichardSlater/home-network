@@ -1,13 +1,13 @@
 # global/main.tf
 terraform {
   backend "gcs" {
-    bucket = "slaterfamily-remote-state-global"
-    prefix = "terraform/state"
+    bucket = "${var.admin_project}"
+    prefix = "terraform/state/global"
   }
 }
 
 provider "google" {
-  project = "slaterfamily-terraform"
+  project = "${var.admin_project}"
   region  = "europe-west2"
   zone    = "europe-west2-b"
   version = "~> 1.20"

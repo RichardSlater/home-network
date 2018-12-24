@@ -35,8 +35,7 @@ graph overview {
 
 1. Create a Google Cloud Account.
 2. Configure billing.
-3. Create the `slaterfamily-terraform` project file.
-4. Run through the documentation in the [`terraform` folder][terraform-readme].
+3. Run through the documentation in the [`terraform` folder][terraform-readme].
 
   [etcher]: https://www.balena.io/etcher/
   [raspbian]: https://www.raspberrypi.org/downloads/raspbian/

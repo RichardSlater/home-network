@@ -6,10 +6,8 @@ Configures Google Cloud and G-Suite.
 
  - Google Cloud Account created.
  - Billing configured in Google Cloud.
- - `slaterfamily-terraform` project created in Google Cloud.
- - GCP Service Account created, and keyfile downloaded to `~/.gcp/slaterfamily-terraform.json`.
- - `export GOOGLE_CLOUD_KEYFILE_JSON ~/.gcp/slaterfamily-terraform.json` added to `.bash_profile` or equivalant.
-
+ - Bootstrapping completed successfully.
+ 
 ## Configure the Shell
 
     source bootstrap/environment.sh
