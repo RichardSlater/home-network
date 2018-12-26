@@ -1,25 +1,16 @@
 # global/main.tf
-terraform {
-  backend "gcs" {
-    bucket = "${var.admin_project}"
-    prefix = "terraform/state/global"
-  }
+
+resource "google_project" "slaterfamily_network" {
+  depends_on      = ["data.google_organization.org"]
+  name            = "Slater Family Network"
+  project_id      = "slaterfamily-network"
+  org_id          = "${data.google_organization.org.id}"
+  billing_account = "${var.billing_account}"
 }
 
-provider "google" {
-  project = "${var.admin_project}"
-  region  = "europe-west2"
-  zone    = "europe-west2-b"
-  version = "~> 1.20"
-}
+module "dns_zone" {
+  source = "../modules/dns_zone"
 
-data "google_organization" "org" {
-  organization = "862145970828"
-}
-
-resource "google_project" "slaterfamily_wifi" {
-  depends_on = ["data.google_organization.org"]
-  name       = "Slater Family WiFi"
-  project_id = "slaterfamily-wifi"
-  org_id     = "${data.google_organization.org.org_id}"
+  domain_name = "slaterfamily.name"
+  project_id  = "${google_project.slaterfamily_network.id}"
 }
