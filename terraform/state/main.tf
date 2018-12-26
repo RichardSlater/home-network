@@ -3,6 +3,6 @@
 module "remote_state" {
   source = "../modules/remote_state"
 
-  environment = "global"
+  environment   = "global"
   admin_project = "${var.admin_project}"
 }

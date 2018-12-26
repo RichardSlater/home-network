@@ -5,6 +5,6 @@ variable "environment" {
 }
 
 variable "admin_project" {
-  type = "string"
+  type        = "string"
   description = "The Terraform Admin Project created using bootstrap/bootstrap.sh"
 }
