@@ -13,8 +13,8 @@ set -e
 ###################################################################
 
 # Configuration Variables, tweak these based upon changes to GCP.
-PROJECT_ROLES='roles/viewer roles/storage.admin'
-ORG_ROLES='roles/resourcemanager.projectCreator roles/billing.user'
+PROJECT_ROLES='roles/viewer roles/storage.admin roles/compute.viewer'
+ORG_ROLES='roles/resourcemanager.projectCreator roles/billing.user roles/browser'
 REQUIRED_SERVICES='cloudresourcemanager.googleapis.com cloudbilling.googleapis.com iam.googleapis.com compute.googleapis.com'
 
 # Script Root for this script, used to source environment.
@@ -114,7 +114,7 @@ done
 for orole in $ORG_ROLES
 do
   echo -e "${GREEN}Terraform User${RESET}: Granting $orole role to the organisation."
-  gcloud organizations add-iam-policy-binding ${TF_VAR_org_id} --member serviceAccount:terraform@${TF_VAR_admin_project}.iam.gserviceaccount.com --role roles/billing.user
+  gcloud organizations add-iam-policy-binding ${TF_VAR_org_id} --member serviceAccount:terraform@${TF_VAR_admin_project}.iam.gserviceaccount.com --role $orole
 done
 
 # All done
