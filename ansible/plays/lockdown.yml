@@ -14,8 +14,9 @@
      - expand-filesystem
      - configure-bash
      - admin-tools
+     - install-ntp
 
-  vars:
+  vars: 
     - inventory_hostname: "net0001"
     - username: "richardslater"
     - comment: "Richard Slater (richard@slaterfamily.name)"
@@ -24,6 +25,16 @@
     - ipaddress: "10.229.1.5/16"
     - routers: "10.229.0.1"
     - dns_servers: "1.1.1.1 1.0.0.1"
+    - toplevel_timeservers: [
+        '0.uk.pool.ntp.org',
+        '1.uk.pool.ntp.org',
+        '2.uk.pool.ntp.org',
+        '3.uk.pool.ntp.org',
+        '0.europe.pool.ntp.org',
+        '1.europe.pool.ntp.org',
+        '2.europe.pool.ntp.org',
+        '3.europe.pool.ntp.org'
+      ]
 
   vars_files: 
     - secrets.yml
