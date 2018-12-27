@@ -51,6 +51,16 @@ resource "google_dns_record_set" "simian_cname_record" {
   project      = "${var.project_id}"
 }
 
+resource "google_dns_record_set" "vpn_cname_record" {
+  type    = "CNAME"
+  ttl     = "300"
+  rrdatas = ["simian.slaterfamily.name."]
+
+  managed_zone = "${google_dns_managed_zone.prod.name}"
+  name         = "vpn.${google_dns_managed_zone.prod.dns_name}"
+  project      = "${var.project_id}"
+}
+
 resource "google_dns_record_set" "google_site_verification_record" {
   type    = "TXT"
   ttl     = "300"
