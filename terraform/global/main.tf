@@ -21,7 +21,7 @@ resource "google_project_iam_binding" "account_owner" {
   role = "roles/owner"
 }
 
-module "dns_zone" {
+module "dns_zone" { 
   source = "../modules/dns_zone"
 
   domain_name = "slaterfamily.name"
