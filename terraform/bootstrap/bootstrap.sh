@@ -15,7 +15,7 @@ set -e
 # Configuration Variables, tweak these based upon changes to GCP.
 PROJECT_ROLES='roles/viewer roles/storage.admin roles/compute.viewer'
 ORG_ROLES='roles/resourcemanager.projectCreator roles/billing.user roles/browser'
-REQUIRED_SERVICES='cloudresourcemanager.googleapis.com cloudbilling.googleapis.com iam.googleapis.com compute.googleapis.com'
+REQUIRED_SERVICES='cloudresourcemanager.googleapis.com cloudbilling.googleapis.com iam.googleapis.com compute.googleapis.com appengine.googleapis.com'
 
 # Script Root for this script, used to source environment.
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
