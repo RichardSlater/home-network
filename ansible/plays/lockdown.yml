@@ -13,6 +13,7 @@
      - static-ip
      - expand-filesystem
      - configure-bash
+     - admin-tools
 
   vars:
     - inventory_hostname: "net0001"

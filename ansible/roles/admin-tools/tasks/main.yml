@@ -1,0 +1,11 @@
+- name: Install admin tools
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-apt
+    - python-pip
+    - vim
+    - htop
+    - nmap
+    - atop
