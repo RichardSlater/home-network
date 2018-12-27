@@ -3,13 +3,19 @@
   apt:
     package: ntp
     state: present
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
   tags: ntp
 
 - name: Copy over the NTP configuration
   template: src=./files/ntp.conf dest=/etc/ntp.conf
   notify:
-    - restart ntp
+    - stop ntp
     - force ntp update
+    - start ntp
+    - restart ntp
   tags: ntp
 
 - name: Make sure NTP is started up

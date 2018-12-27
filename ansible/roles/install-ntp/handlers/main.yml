@@ -1,7 +1,16 @@
 ---
-- name: restart ntp
-  service: name=ntp state=restarted
+- name: stop ntp
+  service: name=ntp state=stopped
+  when: ansible_hostname != timelord
 
 - name: force ntp update
-  shell: "service ntp stop && ntpdate -s {{ hostvars[groups[timelord][0]]['ansible_' ~ ntp_netdevice]['ipv4']['address'] }} && service ntp start"
+  command: "ntpdate -s {{ hostvars[groups[timelord][0]]['ansible_' ~ ntp_netdevice]['ipv4']['address'] }}"
   when: ansible_hostname != timelord
+
+- name: start ntp
+  service: name=ntp state=started
+  when: ansible_hostname != timelord
+
+- name: restart ntp
+  service: name=ntp state=restarted
+  when: ansible_hostname == timelord
