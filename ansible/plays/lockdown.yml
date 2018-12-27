@@ -16,7 +16,7 @@
      - admin-tools
      - install-ntp
 
-  vars: 
+  vars:
     - inventory_hostname: "net0001"
     - username: "richardslater"
     - comment: "Richard Slater (richard@slaterfamily.name)"
@@ -36,5 +36,5 @@
         '3.europe.pool.ntp.org'
       ]
 
-  vars_files: 
+  vars_files:
     - secrets.yml
