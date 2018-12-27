@@ -43,3 +43,21 @@ graph overview {
   [ansible-vault]: https://docs.ansible.com/ansible/latest/user_guide/vault.html
   [ansible-readme]: ansible/README.md
   [terraform-readme]: terraform/README.md
+
+## Tasks still to complete
+
+ - [ ] Configure UniFi (Terraform Provider)
+   - [ ] Configure Cloud Key
+   - [ ] Configure Networks
+     - [ ] LAN
+     - [ ] VPN
+     - [ ] WAN
+   - [ ] Configure Wireless Networks
+   - [ ] Configure UniFi Security Gateway
+ - [ ] Configure Network Appliance
+   - [ ] Install Pi-hole
+ - [ ] Configure Cloud
+   - [X] Cloud DNS
+   - [X] Dynamic DNS
+   - [X] VPN
+   - [ ] Google Maps API Key
