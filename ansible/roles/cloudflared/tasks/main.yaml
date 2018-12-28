@@ -1,0 +1,5 @@
+  - name: Install and Configure cloudflared
+    include_role:
+      name: bendews.cloudflared
+    vars:
+      cloudflared_allow_firewall: true

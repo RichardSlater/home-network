@@ -1,4 +1,4 @@
-# ansible-playbook -u pi -k -i 'TARGET-DHCP-IP,' lockdown.yml
+# ansible-playbook -u pi -k -i 'TARGET-DHCP-IP,' network.yml
 
 - name: Application server specific playbook
   hosts: all
@@ -15,6 +15,7 @@
      - configure-bash
      - admin-tools
      - install-ntp
+     - cloudflared
 
   vars:
     - inventory_hostname: "net0001"
