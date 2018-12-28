@@ -1,4 +1,5 @@
-# ansible-playbook -u pi -k -i 'TARGET-DHCP-IP,' network.yml
+# ansible-playbook --user ansible --inventory '10.229.1.5,' network.yml  --vault-password-file ~/ansible_password
+---
 
 - name: Application server specific playbook
   hosts: all
@@ -25,7 +26,10 @@
     - interface: "eth0"
     - ipaddress: "10.229.1.5/16"
     - routers: "10.229.0.1"
-    - dns_servers: "1.1.1.1 1.0.0.1"
+    - dns_servers: [
+      "1.1.1.1", 
+      "1.0.0.1"
+    ]
     - toplevel_timeservers: [
         '0.uk.pool.ntp.org',
         '1.uk.pool.ntp.org',
