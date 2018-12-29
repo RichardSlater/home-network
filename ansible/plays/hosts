@@ -1,0 +1,2 @@
+raspberrypi ansible_host=10.229.1.5 ansible_connection=ssh ansible_user=pi ansible_ssh_pass=raspberry ansible_become_pass=raspberry ansible_ssh_extra_args="-o PreferredAuthentications=password"
+net0001 ansible_host=10.229.1.5 ansible_connection=ssh
