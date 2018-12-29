@@ -10,6 +10,10 @@
     groups: adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi,wheel
     state: present
 
+- name: install setfacl support
+  become: yes
+  apt: pkg=acl
+
 - name: Docker Community Edition
   become: yes
   include_role:
