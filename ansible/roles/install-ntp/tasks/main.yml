@@ -1,7 +1,7 @@
 ---
 - name: Install NTP
   apt:
-    package: ntp
+    package: [ ntp, ntpdate ]
     state: present
   register: task_result
   until: task_result is success

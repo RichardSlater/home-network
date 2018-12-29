@@ -1,8 +1,8 @@
-# ansible-playbook --user ansible --inventory '10.229.1.5,' network.yml  --vault-password-file ~/ansible_password
+# ansible-playbook -i hosts network.yml
 ---
 
-- name: Application server specific playbook
-  hosts: all
+- name: Raspberry Pi based Pi-Hole
+  hosts: net0001
   become: yes
   roles:
      - update
