@@ -1,0 +1,5 @@
+docker_pi_user: docker
+docker_pi_hub_username: richardslater
+docker_pi_group_users:
+  - richardslater
+  - ansible

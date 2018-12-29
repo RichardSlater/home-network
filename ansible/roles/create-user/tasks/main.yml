@@ -8,7 +8,7 @@
     shell: /bin/bash
     createhome: yes
     comment: "{{ comment }}"
-    groups: adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi
+    groups: adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi,wheel
     state: present
     password: "{{ password }}"
 

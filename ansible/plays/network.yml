@@ -17,6 +17,7 @@
      - admin-tools
      - install-ntp
      - cloudflared
+     - docker
 
   vars:
     - inventory_hostname: "net0001"

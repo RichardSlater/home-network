@@ -1,0 +1,16 @@
+# roles/docker/tasks/main.yml
+---
+- name: Create a docker user account
+  become: yes
+  user:
+    name: "{{ docker_pi_user }}"
+    shell: /bin/bash
+    createhome: yes
+    comment: "Docker User managed by Ansible (network.yml)"
+    groups: adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi,wheel
+    state: present
+
+- name: Docker Community Edition
+  become: yes
+  include_role:
+    name: benaud12.docker-pi
