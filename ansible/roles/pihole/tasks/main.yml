@@ -1,0 +1,26 @@
+- name: Installing Docker-py Package
+  pip:
+    name: docker-py
+
+# docker run -d --name pihole -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -v "/etc/pihole/:/etc/pihole/" -v "/etc/dnsmasq.d/:/etc/dnsmasq.d/" -e ServerIP="10.229.1.5" --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
+- name: Pi-Hole Container
+  docker_container:
+    name: pihole
+    hostname: pihole
+    image: pihole/pihole
+    restart_policy: unless-stopped
+    volumes:
+      - /etc/pihole/:/etc/pihole/
+      - /etc/dnsmasq.d/:/etc/dnsmasq.d/
+    published_ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    env:
+      ServerIP: "{{ ipaddress }}"
+      TZ: "GB"
+      WEBPASSWORD: "{{ pihole_webpassword }}"
+    capabilities:
+      - NET_ADMIN
+  tags: pihole
