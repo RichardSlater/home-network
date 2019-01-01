@@ -1,5 +1,16 @@
-  - name: Install and Configure cloudflared
-    include_role:
-      name: bendews.cloudflared
-    vars:
-      cloudflared_allow_firewall: true
+---
+# docker run --name cloudflared --rm visibilityspots/cloudflared
+- name: CloudflareD Container
+  docker_container:
+    name: cloudflared
+    hostname: cloudflared
+    image: visibilityspots/cloudflared:arm
+    restart_policy: unless-stopped
+    exposed_ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    networks:
+      - name: "dnsstack"
+        ipv4_address: "172.21.0.5"
+    purge_networks: yes
+  tags: cloudflared

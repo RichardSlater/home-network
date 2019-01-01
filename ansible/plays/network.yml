@@ -16,8 +16,8 @@
      - configure-bash
      - admin-tools
      - install-ntp
-     - cloudflared
      - docker
+     - cloudflared
      - pihole
 
   vars:
