@@ -1,16 +1,29 @@
 ---
-# docker run --name cloudflared --rm visibilityspots/cloudflared
+- name: Pull CloudflareD Image
+  docker_image:
+    name: visibilityspots/cloudflared:arm
+  tags: cloudflared
+
+  # docker run --name cloudflared --rm visibilityspots/cloudflared
 - name: CloudflareD Container
   docker_container:
     name: cloudflared
     hostname: cloudflared
     image: visibilityspots/cloudflared:arm
     restart_policy: unless-stopped
-    exposed_ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+    published_ports:
+      - "{{ cloudflared_dns_port }}:{{ cloudflared_dns_port }}/tcp"
+      - "{{ cloudflared_dns_port }}:{{ cloudflared_dns_port }}/udp"
     networks:
       - name: "dnsstack"
-        ipv4_address: "172.21.0.5"
+        ipv4_address: "{{ cloudflared_docker_ip }}"
     purge_networks: yes
+    restart: yes
+  tags: cloudflared
+
+- name: Wait for CloudflareD to start
+  wait_for:
+    port="{{ cloudflared_dns_port }}"
+    delay=1
+    timeout=300
   tags: cloudflared

@@ -19,6 +19,7 @@ alias lla='ls -la'
 ## Show hidden files ##
 alias l.='ls -d .* --color=auto'
 
+## Colour grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -38,7 +39,6 @@ alias ports='netstat -tulanp'
 # become root #
 alias root='sudo -i'
 alias su='sudo -i'
-
 
 # reboot / halt / poweroff
 alias reboot='sudo /sbin/reboot'
@@ -67,3 +67,7 @@ alias du='du -ch'
 
 # top is atop, just like vi is vim
 alias top='atop'
+
+## Customisation
+alias cls='clear'
+alias tf='terraform'

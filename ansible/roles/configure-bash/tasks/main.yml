@@ -1,3 +1,33 @@
-- name: 'Set default bash aliases'
-  copy: src=./files/etc_profile.d_bash_aliases.sh dest=/etc/profile.d/bash_aliases.sh mode=0600
-  tags: admin
+- name: Installing powerline-shell Package
+  pip:
+    name: powerline-shell
+  tags: bash
+
+- name: Deploy bash profile
+  copy:
+    src: "{{ item }}"
+    dest: /home/richardslater
+    owner: richardslater
+    group: richardslater
+    mode: 0744
+  with_fileglob:
+    - ./files/.*
+  tags: bash
+
+- name: Creates powerline-shell directory
+  file:
+    path: /home/richardslater/powerline-shell
+    state: directory
+    owner: richardslater
+    group: richardslater
+    mode: 0755
+  tags: bash
+
+- name: Deploy powerline-shell config
+  copy:
+    src: "./files/powerline-shell/config.json"
+    dest: /home/richardslater/powerline-shell/config.json
+    owner: richardslater
+    group: richardslater
+    mode: 0644
+  tags: bash

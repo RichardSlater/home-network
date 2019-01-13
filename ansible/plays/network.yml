@@ -29,6 +29,9 @@
     - ipaddress: "10.229.1.5"
     - cidr: "16"
     - routers: "10.229.0.1"
+    - cloudflared_docker_ip: "172.21.0.5"
+    - pihole_docker_ip: "172.21.0.10"
+    - cloudflared_dns_port: "5054"
     - dns_servers: [
       "1.1.1.1", 
       "1.0.0.1"
