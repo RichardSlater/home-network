@@ -2,6 +2,7 @@
 - name: Pull Pi-Hole Image
   docker_image:
     name: pihole/pihole
+    force: true
   tags: pihole
 
 # docker run -d --name pihole -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -v "/etc/pihole/:/etc/pihole/" -v "/etc/dnsmasq.d/:/etc/dnsmasq.d/" -e ServerIP="10.229.1.5" --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
