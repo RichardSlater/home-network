@@ -24,7 +24,7 @@
     - inventory_hostname: "net0001"
     - username: "richardslater"
     - comment: "Richard Slater (richard@slaterfamily.name)"
-    - public_key: "/mnt/c/Users/Richard Slater/.ssh/richard@richard-slater.co.uk-2018.ed25519.pub"
+    - public_key: "/mnt/c/Users/richa/Dropbox (Personal)/SSH/richard@richard-slater.co.uk-2018.ed25519.pub"
     - interface: "eth0"
     - ipaddress: "10.229.1.5"
     - cidr: "16"
