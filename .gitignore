@@ -135,3 +135,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/go,macos,linux,ansible,windows,terraform,appengine,visualstudiocode
+
+# ignore plans created with terraform plan -out .tfplan
+.tfplan
