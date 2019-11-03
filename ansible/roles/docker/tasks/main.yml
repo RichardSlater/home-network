@@ -15,7 +15,6 @@
   apt: pkg=acl
 
 - name: Docker Community Edition
-  become: yes
   include_role:
     name: benaud12.docker-pi
 
@@ -33,5 +32,5 @@
       com.docker.network.bridge.enable_ip_masquerade: true
       com.docker.network.bridge.host_binding_ipv4: 0.0.0.0
       com.docker.network.driver.mtu: 1500
-    ipam_options:
-      subnet: 172.21.0.0/16
+    ipam_config:
+      - subnet: 172.21.0.0/16

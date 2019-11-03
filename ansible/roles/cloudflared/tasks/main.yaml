@@ -2,6 +2,7 @@
 - name: Pull CloudflareD Image
   docker_image:
     name: visibilityspots/cloudflared:arm
+    source: pull
   tags: cloudflared
 
   # docker run --name cloudflared --rm visibilityspots/cloudflared
@@ -19,6 +20,7 @@
         ipv4_address: "{{ cloudflared_docker_ip }}"
     purge_networks: yes
     restart: yes
+    networks_cli_compatible: no
   tags: cloudflared
 
 - name: Wait for CloudflareD to start

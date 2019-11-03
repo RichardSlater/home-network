@@ -2,7 +2,9 @@
 - name: Pull Pi-Hole Image
   docker_image:
     name: pihole/pihole
-    force: true
+    state: present
+    source: pull
+    force_source: yes
   tags: pihole
 
 # docker run -d --name pihole -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -v "/etc/pihole/:/etc/pihole/" -v "/etc/dnsmasq.d/:/etc/dnsmasq.d/" -e ServerIP="10.229.1.5" --restart=unless-stopped --cap-add=NET_ADMIN pihole/pihole:latest
@@ -37,6 +39,7 @@
     #   - "{{ cloudflared_docker_ip }}{{ '#' }}{{ cloudflared_dns_port }}"
     purge_networks: yes
     restart: yes
+    networks_cli_compatible: no
   tags: pihole
 
 - name: Wait for Pi-Hole to start
