@@ -1,6 +1,6 @@
 provider "google" {
-  project = "${var.admin_project}"
+  project = var.admin_project
   region  = "europe-west2"
   zone    = "europe-west2-b"
-  version = "~> 1.20"
+  version = "~> 2.18.1"
 }
