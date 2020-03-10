@@ -19,6 +19,7 @@
      - docker
      - cloudflared
      - pihole
+     - home-assistant
 
   vars:
     - inventory_hostname: "net0001"
@@ -31,6 +32,7 @@
     - routers: "10.229.0.1"
     - cloudflared_docker_ip: "172.21.0.5"
     - pihole_docker_ip: "172.21.0.10"
+    - homeassistant_docker_ip: "172.21.0.20"
     - cloudflared_dns_port: "5054"
     - dns_servers: [
       "1.1.1.1", 

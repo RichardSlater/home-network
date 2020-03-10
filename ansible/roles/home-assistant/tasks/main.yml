@@ -1,0 +1,51 @@
+---
+- name: Creates homeassistant config directory
+  file:
+    path: /etc/homeassistant
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: homeassistant
+
+- name: Copy over the Home Assistant Configuration
+  template:
+    src: ./files/configuration.yaml
+    dest: /etc/homeassistant/configuration.yaml
+    owner: root
+    group: root
+    mode: 0644
+  tags: homeassistant
+
+- name: Copy over Custom Components
+  copy:
+    src: ./files/custom_components
+    dest: /etc/homeassistant
+    owner: root
+    group: root
+    mode: 0644
+    directory_mode: 0755
+  tags: homeassistant
+
+- name: Pull Home Assistant
+  docker_image:
+    name: homeassistant/raspberrypi3-homeassistant:stable    
+    state: present
+    source: pull
+    force_source: yes
+  tags: homeassistant
+
+# $ docker run --init -d --name="home-assistant" -e "TZ=Europe/London" -v /etc/homeassistant:/config --net=host homeassistant/raspberrypi3-homeassistant:stable
+- name: Home Assistant Container
+  docker_container:
+    name: home-assistant
+    hostname: home-assistant
+    image: homeassistant/raspberrypi3-homeassistant:stable
+    restart_policy: unless-stopped
+    volumes:
+      - /etc/homeassistant/:/config/
+    network_mode: host
+    env:
+      TZ: "GB"
+    restart: yes
+  tags: homeassistant

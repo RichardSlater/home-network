@@ -1,0 +1,48 @@
+default_config:
+    tts:
+      - platform: google_translate
+    
+    group: !include groups.yaml
+    automation: !include automations.yaml
+    script: !include scripts.yaml
+    scene: !include scenes.yaml
+
+switch:
+  - platform: tplink
+    host: 10.229.5.179
+    name: grow_light
+
+switch:
+  - platform: tplink
+    host: 10.229.5.40
+    name: rock_salt_lamp
+
+emulated_hue:
+  host_ip: {{ ipaddress }}
+  listen_port: 8300
+  advertise_ip: {{ ipaddress }}
+  expose_by_default: true
+  exposed_domains:
+    - switch
+    - light
+
+media_player:
+  - platform: philips_android_tv
+    name: Living Room TV
+    host: 10.229.5.178
+    mac: e8:d0:fc:64:0e:7b
+    username: QTheet8e6WAiWDyZ
+    password: 9e6c14e2e9c231a0e8bae7359a2dd7385f4cdb9586013da992384e8950e8cfb7
+
+pi_hole:
+  host: '{{pihole_docker_ip}}:80'
+  ssl: false
+
+binary_sensor:
+  - platform: huesensor
+
+device_tracker:
+  - platform: huesensor
+
+sensor:
+  - platform: huesensor
